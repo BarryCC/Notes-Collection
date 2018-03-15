@@ -1,0 +1,38 @@
+1、本地安装git；
+
+2、创建SSH Keys，方便将本地文件上传到GitHub：
+    创建用户主目录 G:\gitHome，打开git bash，
+    创建SSH Key命令行：ssh-keygen -t rsa -C "643987053@qq.com"，之后会生成.ssh文件，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，
+    打开GitHub，打开setting，“SSH Keys”页面，添加一个SSH Keys，填上title，将id_rsa.pub公钥的内容添加到key文本框中即可；
+    
+3、在GitHub上打开your profile，创建一支profile，
+    在电脑本地，在G:\gitHome目录下新建一个目录learningNotes（名字最好和profile名字一样，方便以后管理），
+    命令行工具（git bash）进入example目录，运行：git init，
+    其中可以创建一个文件readme.md，然后命令：git add readme.md , git commit -m "first commit", 
+    （注：第一次用git提交东西的时候可能需要你注册一下git）
+    然后建立远程仓库联系，运行命令：$ git remote add origin https://github.com/BarryCC/learningNotes.git，
+    然后运行：git push -u origin master，
+    （注：加上了-u参数，Git会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来）
+    以后就可以直接运行命令来提交：git push origin master；
+注意事项：
+    首页在本地（git add ）添加或删除（git rm）文件,都需要先提交（git  commit -m "commit",），然后上传到GitHub（git push origin master）；
+    
+4、对于已经创建（里面有文件）的一支profile
+    回到户主目录 G:\gitHome，
+    从远程库克隆该支profile：git clone https://github.com/BarryCC/example.git，之后好像就可以直接进行提交操作了；
+    （注：如果不行的话可以运行命令：$ git remote add origin https://github.com/BarryCC/example.git， $ git push -u origin master）
+
+5、在本地更新GitHub上文件到本地：git pull origin master
+
+附git部分命令行教程：
+    window下创建仓库：git init；
+    将文件添加到仓库:
+        1、git add ；告诉git
+        2、git commit -m “说明”；提交到git；
+    git status 查看仓库状态；
+    git diff 对比，查看修改内容；
+    git log 显示最近到远的提交日志；
+    git reset --hard commit id（HEAD）HEAD指向当前版本，HEAD^表示上一个版本（类推）；
+    也可以把暂存区的修改退到工作区；
+    git reflog 查看命令历史；
+    git rm 用于删除文件，git checkout -- （一键还原）；
