@@ -1,3 +1,5 @@
+JavaScript知识点：防抖（动画防抖）、节流（节流优化）、定时器
+
 一 、防抖
 function debounce (func, timeWait, immediate) {
     var timeout, result;
