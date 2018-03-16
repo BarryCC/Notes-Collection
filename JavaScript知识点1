@@ -1,0 +1,59 @@
+一、数组去重
+  1、indexOf
+  function unique(array) {
+      var res = [];
+      for (var i = 0, len = array.length; i < len; i++) {
+          var current = array[i];
+          if (res.indexOf(current) === -1) {
+              res.push(current)
+          }
+      }
+      return res;
+  }
+  2、filter 
+  function unique(array) {
+      var res = array.filter(function(item, index, array){
+          return array.indexOf(item) === index;
+      })
+      return res;
+  }
+  3、ES6
+  function unique(array) {
+     return Array.from(new Set(array));
+  }
+  var unique = (a) => [...new Set(a)]
+
+二、类型判断
+  数据类型有string、number、boolean（基础类型）、null、undefined（特殊类型）、Object（应用类型）；
+  判断数据类型的方法：typeof(一般判断基础类型)、instanceof（判断实例）、constructor、Object.prototype.toString;
+  typeof:适用于基本类型及function检测，对null无效；
+  Object.prototype.toSring:适合内置对象和基元类型;instanceof:适合自定义对象（基于原型链）和原生对象;
+
+三、深浅拷贝
+  如果父对象的属性等于数组或另一个对象，那么实际上，子对象获得的只是一个内存地址，而不是真正拷贝，因此存在父对象被篡改的可能；
+  var shallowCopy = function(obj) {
+      // 只拷贝对象
+      if (typeof obj !== 'object') return;
+      // 根据obj的类型判断是新建一个数组还是对象
+      var newObj = obj instanceof Array ? [] : {};
+      // 遍历obj，并且判断是obj的属性才拷贝
+      for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+              newObj[key] = obj[key];
+          }
+      }
+      return newObj;
+  }
+
+  var deepCopy = function(obj) {
+      if (typeof obj !== 'object') return;
+      var newObj = obj instanceof Array ? [] : {};
+      for (var key in obj) {
+          if (obj.hasOwnProperty(key)) {
+              newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key];
+          }
+      }
+      return newObj;
+  }
+
+
