@@ -2,7 +2,7 @@
 
 2、创建SSH Keys，方便将本地文件上传到GitHub：
     创建用户主目录 G:\gitHome，打开git bash，
-    创建SSH Key命令行：ssh-keygen -t rsa -C "643987053@qq.com"，之后会生成.ssh文件，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，
+    创建SSH Key命令行：ssh-keygen -t rsa -C "GitHub邮箱"，之后会生成.ssh文件，id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，
     打开GitHub，打开setting，“SSH Keys”页面，添加一个SSH Keys，填上title，将id_rsa.pub公钥的内容添加到key文本框中即可；
     
 3、在GitHub上打开your profile，创建一支profile，
