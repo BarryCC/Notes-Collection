@@ -1,35 +1,4 @@
 
-一、通过url获取参数的两种原生方法（使用框架的话一般都会提供）：
-方法一（推荐）：
-    urlinfo=window.location.href; //获取当前页面的url
-    len=urlinfo.length;//获取url的长度
-    offset=urlinfo.indexOf("?");//设置参数字符串开始的位置
-    newsidinfo=urlinfo.substr(offset,len)//取出参数字符串 这里会获得类似“id=1”这样的字符串
-    newsids=newsidinfo.split("=");//对获得的参数字符串按照“=”进行分割
-    newsid=newsids[1];//得到参数值
-方法二：
-    function getQueryStringArgs(){
-    //取得查询字符串并去掉开头的问号
-    var qs = (location.search.length > 0 ? location.search.substring(1) : ""),
-        args = () ,
-        items = qs.length ? qs.spilt("&") : [],
-        items = null,
-        name = null,
-        value = null,
-        i = 0.
-        len = items.length;
-    for(i=0;i < len; i++){
-        item = item[i].split("=");
-        name = decodeURIComponent(item[0]);
-        value = decodeURIComponent(item[1]);
-        if (name.length){
-            args[name] = value;
-        }
-    }
-    return args;
-    }    
-
-二、小知识点
 1、最好通过（“”+number）将数字转换成字符串；
 2、数组的创建：使用[]操作符来创建，比Array的构造函数效率高
 3、表单提交时阻止默认事件响应：
