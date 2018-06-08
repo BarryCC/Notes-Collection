@@ -1,8 +1,0 @@
-
-1、最好通过（“”+number）将数字转换成字符串；
-2、数组的创建：使用[]操作符来创建，比Array的构造函数效率高
-3、表单提交时阻止默认事件响应：
-let event = event || window.event;
-event.preventDefault(); // 兼容标准浏览器
-
-
