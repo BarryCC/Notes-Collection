@@ -38,7 +38,7 @@ postData('http://example.com/answer', {answer: 42})
  */
 function getDataHandle(obj, arr = [], idx = 0) {
     for (let item in obj) {
-      arr[idx++] = [item, obj[item]]
+        arr[idx++] = [item, obj[item]]
     }
     return new URLSearchParams(arr).toString()
 }
