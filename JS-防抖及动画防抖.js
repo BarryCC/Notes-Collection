@@ -1,22 +1,17 @@
-/*********** 防抖 ***********/
-function debounce (func, timeWait, immediate) {
+/*********** 去抖debounce 去抖就是对于一定时间段的连续的函数调用，只让其执行一次 ***********/
+// 应用：每次 resize/scroll 触发统计事件文本输入的验证等
+function debounce (func, timeWait) {
 	var timeout, result;
 	return function () {
-		var context = this;  //使this正确指向
-		var args = arguments;  //处理事件对象event
-		if (timeout) clearTimeout(timeout);
-		if(immediate) {
-			//如果已经执行过，不在执行
-			var callNow = !timeout;
-			timeout = setTimeout(function() {
-				timeout = null;
-			}, timeWait);
-			if (callNow) result = func.apply(context, args);
-		} else {
-			timeout = setTimeout(function() {
-				func.apply(context, args);
-			},timeWait);
+		var context = this, //使this正确指向
+			args = arguments;  //处理事件对象event
+		if (timeout) {
+			clearTimeout(timeout);
+			timeout = null;
 		}
+		timeout = setTimeout(function() {
+			func.apply(context, args);
+		}, timeWait);
 		return result;
 	}
 }
@@ -26,7 +21,7 @@ function debounce(func) {
 	var timeout;
 	return function () {
 		cancelAnimationFrame(timeout)
-		t = requestAnimationFrame(func);
+		timeout = requestAnimationFrame(func);
 	}
 }
 
@@ -40,15 +35,7 @@ window.requestAnimFrame = (function() {
 		window.setTimeout(callback, 1000 / 60);
 	};
 })();
-var e = document.getElementById("e");
-var flag = true;
-var left = 0;
-function render() {
-    left == 0 ? flag = true : left == 100 ? flag = false : '';
-    flag ? e.style.left = ` ${left++}px`:
-        e.style.left = ` ${left--}px`;
-}
-(function animloop() {
-    render();
+function animloop() {
+	/*** coding ***/
     requestAnimFrame(animloop);
-})();
+};
