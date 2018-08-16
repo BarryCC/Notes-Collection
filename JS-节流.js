@@ -1,4 +1,11 @@
-/*********** 节流 ***********/
+/*********** 节流 throttle 让一个函数不要执行的太频繁，减少执行过快的调用，叫节流 ***********/
+
+//在返回的匿名函数中调用
+    context = this;
+    args = arguments;
+    func.apply(context, args)
+// 原因？
+
 // 1、使用时间戳，当触发事件的时候，我们取出当前的时间戳，然后减去之前的时间戳(最一开始值设为 0 )，
 // 如果大于设置的时间周期，就执行函数，然后更新时间戳为当前的时间戳，如果小于，就不执行。
 function throttle(func, wait) {
@@ -24,13 +31,14 @@ function throttle(func, wait) {
         args = arguments;
         if (!timeout) {
             timeout = setTimeout(function() {
+                clearTimeout(timeout)
                 timeout = null;
                 func.apply(context, args)
             }, wait)
         }
     }
 }
- 
+
 // 节流优化 ：
 function throttle(func, wait) {
     var timeout, context, args, result;

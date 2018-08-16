@@ -34,6 +34,7 @@ function isWeiXinClient() {
 }
 
 /*** 检测是否移动端及浏览器内核 ***/
+//方法
 var browser = {
     versions: function() {
         var u = navigator.userAgent;
@@ -51,6 +52,7 @@ var browser = {
         };
     }
 }
+//使用
 if (browser.versions.mobile() || browser.versions.ios() || browser.versions.android() || browser.versions.iPhone() || browser.versions.iPad()) {
     alert('移动端');
 }
