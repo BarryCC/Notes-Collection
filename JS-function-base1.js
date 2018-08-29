@@ -1,4 +1,4 @@
-/*** 阻止默认行为和冒泡 ***/
+/*** 阻止默认行为和冒泡 兼容性 ***/
 event = event || window.event;
 if(event.preventDefault || event.stopPropagation){
     //w3c
@@ -9,6 +9,40 @@ if(event.preventDefault || event.stopPropagation){
     event.returnValue = false;
     event.cancelBubble = true;
 }
+
+
+/*** 数组排序 ***/
+// 升序
+arr.sort(function(a, b){
+    return a-b;
+});
+// 降序
+arr.sort(function(a, b){
+    return b-a;
+});
+
+
+/*** 时间戳、毫秒格式化 ， 当前日期 ***/
+function formatDate(now) {
+    var y = now.getFullYear();
+    var m = now.getMonth() + 1; // 注意 JavaScript 月份+1
+    var d = now.getDate();
+    var h = now.getHours();
+    var m = now.getMinutes();
+    var s = now.getSeconds();
+    return y + "-" + m + "-" + d + " " + h + ":" + m + ":" + s;
+}
+var nowDate = new Date(1442978789184);
+alert(formatDate(nowDate));
+
+/*** 获取规范时间 ***/
+var calculateDate = function(){
+    var date = new Date();
+    var weeks = ["日","一","二","三","四","五","六"];
+    return date.getFullYear()+"年"+(date.getMonth()+1)+"月"+
+    date.getDate()+"日 星期"+weeks[date.getDay()];
+}
+
 
 /*** 检测浏览器是否支持SVG和canvas ***/
 function isSupportSVG() {
@@ -55,25 +89,4 @@ var browser = {
 //使用
 if (browser.versions.mobile() || browser.versions.ios() || browser.versions.android() || browser.versions.iPhone() || browser.versions.iPad()) {
     alert('移动端');
-}
-
-/*** 时间戳、毫秒格式化 ， 当前日期 ***/
-function formatDate(now) {
-    var y = now.getFullYear();
-    var m = now.getMonth() + 1; // 注意 JavaScript 月份+1
-    var d = now.getDate();
-    var h = now.getHours();
-    var m = now.getMinutes();
-    var s = now.getSeconds();
-    return y + "-" + m + "-" + d + " " + h + ":" + m + ":" + s;
-}
-var nowDate = new Date(1442978789184);
-alert(formatDate(nowDate));
-
-/*** 获取规范时间 ***/
-var calculateDate = function(){
-    var date = new Date();
-    var weeks = ["日","一","二","三","四","五","六"];
-    return date.getFullYear()+"年"+(date.getMonth()+1)+"月"+
-    date.getDate()+"日 星期"+weeks[date.getDay()];
 }
