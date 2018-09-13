@@ -10,18 +10,6 @@ if(event.preventDefault || event.stopPropagation){
     event.cancelBubble = true;
 }
 
-
-/*** 数组排序 ***/
-// 升序
-arr.sort(function(a, b){
-    return a-b;
-});
-// 降序
-arr.sort(function(a, b){
-    return b-a;
-});
-
-
 /*** 时间戳、毫秒格式化 ， 当前日期 ***/
 function formatDate(now) {
     var y = now.getFullYear();
