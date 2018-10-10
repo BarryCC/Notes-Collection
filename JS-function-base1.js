@@ -1,3 +1,12 @@
+/*** 取数组中下标对象值，防止数组为空时，取值报错  ***/
+function safeProps(func, defaultVal) {
+    try {
+        return func();
+    } catch (e) {
+        return defaultVal;
+    }
+}
+
 /*** 阻止默认行为和冒泡 兼容性 ***/
 event = event || window.event;
 if(event.preventDefault || event.stopPropagation){
@@ -10,26 +19,16 @@ if(event.preventDefault || event.stopPropagation){
     event.cancelBubble = true;
 }
 
-/*** 时间戳、毫秒格式化 ， 当前日期 ***/
-function formatDate(now) {
-    var y = now.getFullYear();
-    var m = now.getMonth() + 1; // 注意 JavaScript 月份+1
-    var d = now.getDate();
-    var h = now.getHours();
-    var m = now.getMinutes();
-    var s = now.getSeconds();
-    return y + "-" + m + "-" + d + " " + h + ":" + m + ":" + s;
-}
-var nowDate = new Date(1442978789184);
-alert(formatDate(nowDate));
-
 /*** 获取规范时间 ***/
-var calculateDate = function(){
-    var date = new Date();
+// var h = now.getHours();
+// var m = now.getMinutes();
+// var s = now.getSeconds();
+function formatDate(date){
     var weeks = ["日","一","二","三","四","五","六"];
-    return date.getFullYear()+"年"+(date.getMonth()+1)+"月"+
-    date.getDate()+"日 星期"+weeks[date.getDay()];
+    return date.getFullYear() + "年" + (date.getMonth()+1) + "月" + date.getDate() + "日 星期" + weeks[date.getDay()];
 }
+var date = new Date();
+alert(formatDate(date));
 
 
 /*** 检测浏览器是否支持SVG和canvas ***/
