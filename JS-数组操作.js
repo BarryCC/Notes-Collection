@@ -66,8 +66,29 @@ function unique(array) {
 
 
 /*********************************** 数组获取最大值 *******************************************/
+// ES5
 function getMaxOfArr(arr) {
     return Math.max.apply(null, arr);
 }
-// ES6环境
+// ES6
 Math.max(...arr);
+
+/*********************** 使用push方法，将一个数组添加到另一个数组的尾部**************************/
+// ES5
+Array.prototype.push.apply(arr1, arr2);
+// ES6
+arr1.push(...arr2);
+
+/*********************** 复制 **************************/
+// ES5
+var a1 = [1, 2];
+var a2 = a1.concat();
+// ES6
+const a1 = [1, 2];
+const a2 = [...a1];
+
+/*********************** 合并数组 **************************/
+// ES5
+arr1.concat(arr2, arr3);
+// ES6
+[...arr1, ...arr2, ...arr3]
