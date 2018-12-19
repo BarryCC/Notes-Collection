@@ -16,17 +16,17 @@
 4. vue-router（路由）：https://router.vuejs.org/zh/
 5. vuex状态管理：https://vuex.vuejs.org/zh/guide/
 6. vue开发风格指南：https://cn.vuejs.org/v2/style-guide/#%E8%A7%84%E5%88%99%E5%BD%92%E7%B1%BB
-7. UI组件库（web）：https://www.iviewui.com/、http://element-cn.eleme.io/#/zh-CN/component/installation
+7. UI组件库（web）：[蚂蚁金服](https://www.iviewui.com/)、[饿了么](http://element-cn.eleme.io/#/zh-CN/component/installation)
 8. vue-awesome（经典实例集合）：https://github.com/vuejs/awesome-vue
-9. 集合：https://github.com/opendigg/awesome-github-vue、http://www.alloyteam.com/nav/
+9. 集合：[集合1](https://github.com/opendigg/awesome-github-vue)、[集合2](http://www.alloyteam.com/nav/)
 ***
 #### REACT：
 1. 文档：https://reactjs.org/
 2. 路由router：https://react-guide.github.io/react-router-cn/index.html
 3. flux： https://facebook.github.io/flux/
-4. redux：http://www.redux.org.cn/  、 https://redux.js.org/
+4. redux：[中文版](http://www.redux.org.cn/)  、 [英文版](https://redux.js.org/)
 5. 阮一峰react系列教程：http://www.ruanyifeng.com/blog/2016/09/react-technology-stack.html
-6. UI组件库：https://github.com/mui-org/material-ui、https://github.com/react-bootstrap/react-bootstrap
+6. UI组件库：[material-ui](https://github.com/mui-org/material-ui)、[react-bootstrap](https://github.com/react-bootstrap/react-bootstrap)
 7. react chart：http://recharts.org/zh-CN/guide
 ***
 #### 工具及其他：
@@ -45,7 +45,7 @@
 2. 微信小程序：https://developers.weixin.qq.com/miniprogram/dev/
 ***
 #### node：
-1. 文档：https://nodejs.org/api/documentation.html  、http://nodejs.cn/api/documentation.html
+1. 文档：[英文版](https://nodejs.org/api/documentation.html ) 、[中文版](http://nodejs.cn/api/documentation.html)
 2. node版本切换工具nvm：https://www.cnblogs.com/SpecterGK/p/8550392.html?tdsourcetag=s_pctim_aiomsg
 ***
 #### 博客及技术集合：
