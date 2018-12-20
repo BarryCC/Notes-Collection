@@ -1,5 +1,7 @@
 ## 前端开发技术学习笔记
 
+## 前端开发技术学习笔记
+
 #### web前端：
 1. MDN：https://developer.mozilla.org/zh-CN/docs/Web
 2. 前端开源书籍：https://love2.io/welcome/frontend
@@ -39,6 +41,7 @@
 7. vue可拖拽插件：https://github.com/hejianxian/vddl
 8. echarts：http://echarts.baidu.com/
 9. JSON Web Token：http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html
+10. rollup编译打包工具：[rollup](https://rollupjs.org/guide/zh)
 ***
 #### 移动端：
 1. 移动端VM及rem布局、postcss：https://www.w3cplus.com/mobile/vw-layout-in-vue.html?tdsourcetag=s_pctim_aiomsg
