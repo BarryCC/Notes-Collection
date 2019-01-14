@@ -1,7 +1,5 @@
 ## 前端开发技术学习笔记
 
-## 前端开发技术学习笔记
-
 #### web前端：
 1. MDN：https://developer.mozilla.org/zh-CN/docs/Web
 2. 前端开源书籍：https://love2.io/welcome/frontend
