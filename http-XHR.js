@@ -51,6 +51,8 @@ xhr.onprogress = function(event) {
       console.log(`Received: ${(event.position/event.totalSize).toFixed(4)*100}%`);
     }
 }
+// 前端设置是否带cookie
+xhr.withCredentials = true;
 
 /*
 *  open()方法不会立即发送请求，处于待命状态，调用send()方法就会发出这个http请求，第三个参数代表是否异步发送请求
