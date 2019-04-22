@@ -1,28 +1,3 @@
-//创建XMLHTTPRequest实例，兼容低版本IE
-function creatXHR() {
-    if (typeof XMLHTTPRequest != "undefined") {
-        return new XMLHTTPRequest();
-    } else if (typeof ActiveXObject != "undefined") {
-        if (typeof arguments.callee.activeXString != "string") {
-            let versions = ["MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp.6.0", "MSXML2.XMLHttp"];
-            let i,
-                len;
-            for (i=0,len = versions.length; i < len; i++) {
-                try {
-                    new ActiveXObject(versions[i]);
-                    arguments.callee.activeXString = versions[i];
-                    break;
-                } catch (ex) {
-                    //跳过
-                }
-            }
-        }
-        return new ActiveXObject(arguments.callee.activeXString);
-    } else {
-        throw new Error("No XHR abject available");
-    }
-}
-
 function readyStateChange () {
     if (xhr.readyState == 4) {
         if ((xhr.status >=200 && xhr.status < 300) || xhr.status == 304) {
@@ -39,7 +14,8 @@ function readyStateChange () {
     }
 };
 
-var xhr = creatXHR();
+//创建XMLHTTPRequest实例
+var xhr = new XMLHTTPRequest();
 
 // 超时事件
 xhr.ontimeout = function() {
