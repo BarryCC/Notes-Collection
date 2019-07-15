@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS波浪效果</title>
+    <style type="text/css">
+    /*** SVG实现 ***/
+    .css-live-wrap {
+        float: left;
+        width: 300px;
+        height: 400px;
+        text-align: center;
+    }
+    /*** canvs实现 ***/
+    #canvas {
+        box-sizing: content-box;
+        padding: 5px;
+        background-color: #fff;
+        border-radius: 100%;
+        border: 10px solid rgba(154, 205, 50, .8);  
+    }
+    /*** 纯CSS实现 ***/
+    .container {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        padding: 5px;
+        border: 5px solid rgb(118, 218, 255);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .wave {
+        position: relative;
+        width: 200px;
+        height: 200px;
+        background-color: rgb(118, 218, 255);
+        border-radius: 50%;
+    }
+    .wave::before,
+    .wave::after{
+        content: "";
+        position: absolute;
+        width: 400px;
+        height: 400px;
+        top: 0;
+        left: 50%;
+        background-color: rgba(255, 255, 255, .4);
+        border-radius: 45%;
+        transform: translate(-50%, -70%) rotate(0);
+        animation: rotate 6s linear infinite;
+        z-index: 10;
+    }
+    .wave::after {
+        border-radius: 47%;
+        background-color: rgba(255, 255, 255, .9);
+        transform: translate(-50%, -70%) rotate(0);
+        animation: rotate 10s linear -5s infinite;
+        z-index: 20;
+    }
+    @keyframes rotate {
+        50% {
+            transform: translate(-50%, -73%) rotate(180deg);
+        } 100% {
+            transform: translate(-50%, -70%) rotate(360deg);
+        }
+    }
+    </style>
+</head>
+<body>
+    <h1>CSS波浪效果-实现</h1>
+    <div class="css-live-wrap">
+        <h2>SVG实现</h2>
+        <hgroup>
+            <svg width="200px" height="200px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                <text class="liquidFillGaugeText" text-anchor="middle" font-size="42px" transform="translate(100,120)" style="fill: #000">50.0%</text>
+                <!-- Wave波浪 -->
+                <g id="wave">
+                    <path id="wave-2" fill="rgba(154, 205, 50, .8)" d="M 0 100 C 140.6 94.24 45.08 106.32 200 100 A 95 95 0 0 1 0 100 Z">
+                    <animate dur="5s" repeatCount="indefinite" attributeName="d" attributeType="XML" values="M0 100 C90 28, 92 179, 200 100 A95 95 0 0 1 0 100 Z;
+                                                M0 100 C145 100, 41 100, 200 100 A95 95 0 0 1 0 100 Z;
+                                                M0 100 C90 28, 92 179, 200 100 A95 95 0 0 1 0 100 Z"></animate>
+                    </path>
+                </g>
+                <circle cx="100" cy="100" r="80" stroke-width="10" stroke="white" fill="transparent"></circle>
+                <circle cx="100" cy="100" r="90" stroke-width="20" stroke="yellowgreen" fill="none"></circle>
+            </svg>
+        </hgroup>
+    </div>
+    <div class="css-live-wrap">
+        <h2>canvs实现</h2>
+        <canvas id="canvas" width="180" height="180"></canvas>
+    </div>
+    <div class="css-live-wrap">
+        <h2>纯CSS实现</h2>
+        <div class="wave"></div>
+    </div>
+<script type="text/javascript">
+window.onload = function(){
+    // canvs实现
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+    var radians = (Math.PI / 180) * 180;
+    var startTime = Date.now();
+    var time = 2000;
+    var clockwise = 1;
+    var cp1x, cp1y, cp2x, cp2y;
+    // 初始状态
+    // ctx.bezierCurveTo(90, 28, 92, 179, 200, 100);
+    // 末尾状态
+    // ctx.bezierCurveTo(145, 100, 41, 100, 200, 100);
+    requestAnimationFrame(function waveDraw() {
+        let t = Math.min(1.0, (Date.now() - startTime) / time);
+        if(clockwise) {
+            cp1x = 90 + (55 * t);
+            cp1y = 28 + (72 * t);
+            cp2x = 92 - (51 * t);
+            cp2y = 179 - (79 * t);
+        } else {
+            cp1x = 145 - (55 * t);
+            cp1y = 100 - (72 * t);
+            cp2x = 41 + (51 * t);
+            cp2y = 100 + (79 * t);
+        }
+        ctx.clearRect(0, 0, 200, 200); 
+        ctx.beginPath();
+        ctx.moveTo(0, 100);
+        // 绘制三次贝塞尔曲线
+        ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, 200, 100);
+        // 绘制圆弧
+        ctx.arc(100, 100, 100, 0, radians, 0);
+        ctx.fillStyle = "rgba(154, 205, 50, .8)";
+        ctx.fill();
+        ctx.save();
+        if( t == 1 ) {
+            startTime = Date.now();
+            clockwise = !clockwise;
+        }
+        requestAnimationFrame(waveDraw);
+    });
+}
+</script>
+</body>
+</html>

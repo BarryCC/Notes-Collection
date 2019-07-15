@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas</title>
+    <meta charset="utf-8">
+    <style>
+        #canvas{
+            border: 1px solid #aaaaaa; 
+            display: block; 
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800">
+        你的浏览器不支持Canvas
+    </canvas>
+</body>
+<script type="text/javascript">
+    window.onload=function () {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        
+        context.beginPath();
+        context.rect(0, 0, 800, 800);
+        context.fillStyle = '#AA9033';
+        context.fill();
+        
+        //标准圆弧：context.arc(x,y,radius,startAngle,endAngle,anticlockwise)
+        //参数，前三个参数，圆心坐标与圆半径，endAngle与anticlockwise弧度值范围，一个圆为2pi；
+        //anticlockwise(),传入true逆时针绘制，false顺时针绘制
+        //实例1，绘制圆角矩形
+        function drawRoundRect(cxt, x, y, width, height, radius){
+            cxt.beginPath();
+            cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
+            cxt.lineTo(width - radius + x, y);
+            cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);
+            cxt.lineTo(width + x, height + y - radius);
+            cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);
+            cxt.lineTo(radius + x, height +y);
+            cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);
+            cxt.closePath();
+        }
+        drawRoundRect(context, 10, 10, 190, 190, 20);
+        context.strokeStyle = "#0078AA";
+        context.stroke();
+
+        //切点绘制圆弧：arcTo(x1,y1,x2,y2,radius)
+        //参数：两个切点坐标和圆弧半径，起始点（配合moveTo）
+
+        //二次贝塞尔曲线：context.quadraticCurveTo(cpx,cpy,x,y);
+        //参数：p1(cpx, cpy)是控制点，p2(x, y)是终止点，p0起始点(配合moveTo)
+        //实例2
+        //外框
+        context.beginPath();
+        context.rect(210, 10, 190, 190);
+        context.strokeStyle = '#fff';
+        context.stroke();
+        //文字
+        context.beginPath();
+        context.font="20px Georgia";
+        context.strokeText("w3school.com.cn",230,40);
+        context.strokeStyle = "blue";
+        context.stroke();
+        //图形
+        context.beginPath();
+        context.moveTo(220, 150);
+        context.quadraticCurveTo(300, 50, 380, 150);
+        context.lineWidth = 6;
+        context.strokeStyle = "#333";
+        context.stroke();
+
+        //三次赛贝尔曲线：bezierCurveTo(cp1x,cp1y,cp2x,cp2y,x,y);方法
+        //一个起始点、参数：两个控制点、一个终止点
+        //实例3
+        function drawSky(cxt) {
+            cxt.save();//保存当前状态到堆栈
+
+            cxt.beginPath();
+            cxt.moveTo(0, 620);
+            cxt.bezierCurveTo(250, 500, 350, 750, 800, 600);//分割线
+            cxt.lineTo(800, 200);
+            cxt.lineTo(0, 200);
+            cxt.closePath();
+            //天空渐变颜色
+            var lineStyle = cxt.createRadialGradient(400, 200, 50, 400, 200, 200);
+            lineStyle.addColorStop(0, "#42A9AA");
+            lineStyle.addColorStop(1, "#2491aa");
+
+            cxt.fillStyle = lineStyle;
+            cxt.fill();
+            cxt.restore();//调出最后存储的堆栈恢复画布
+        }
+        function drawPrairie(cxt) {
+            cxt.save();
+
+            cxt.beginPath();
+            cxt.moveTo(0, 620);
+            cxt.bezierCurveTo(250, 500, 350, 750, 800, 600);
+            cxt.lineTo(800, 800);
+            cxt.lineTo(0, 800);
+            cxt.closePath();
+
+            var lineStyle = cxt.createLinearGradient(0, 800, 800, 0);
+            lineStyle.addColorStop(0, '#00aa58');
+            lineStyle.addColorStop(0.3, '#63aa7b');
+            lineStyle.addColorStop(1, '#04aa00');
+
+            cxt.fillStyle = lineStyle;
+            cxt.fill();
+            cxt.restore();
+        }
+        function drawCloud(cxt, cx, cy, cw) {
+            var maxWidth = 800;
+            var cx = cx % maxWidth;
+            var ch = cw * 0.6;
+
+            cxt.beginPath();
+            cxt.fillStyle = '#ffffff';
+            var grd = cxt.createLinearGradient(0, 0, 0, cy);
+            grd.addColorStop(0, 'rgba(255, 255, 255, 0.8)');
+            grd.addColorStop(1, 'rgba(255, 255, 255, 0.5)');
+            cxt.fillStyle = grd;
+            //在不同位置创建5个圆拼接成云朵现状
+            cxt.arc(cx, cy, cw * 0.19, 0, 360, false);
+            cxt.arc(cx + cw * 0.08, cy - ch * 0.3, cw * 0.11, 0, 360, false);
+            cxt.arc(cx + cw * 0.3, cy - ch * 0.25, cw * 0.25, 0, 360, false);
+            cxt.arc(cx + cw * 0.6, cy, cw * 0.21, 0, 360, false);
+            cxt.arc(cx + cw * 0.3, cy - ch * 0.1, cw * 0.28, 0, 360, false);
+            cxt.closePath();
+
+            cxt.fill();
+        }
+        drawPrairie(context);
+        drawSky(context);
+        for(var i=0; i <5; i++){
+            var x0 = 500 * Math.random() + 50;
+            var y0 = 500 * Math.random() + 50;
+            var c0 = 100 * Math.random() + 50;
+            drawCloud(context, x0, y0, c0);
+        }
+
+    }
+</script>
+</html>

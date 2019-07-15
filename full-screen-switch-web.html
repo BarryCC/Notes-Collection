@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>web-home</title>
+    <style>
+    body, html {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+    }
+    #container {
+        height: 100%;
+        transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+    }
+    .section {
+        height: 100%;
+        background-size: cover;
+        background-position: 50% 50%;
+        text-align: center;
+    }
+    .section1 {
+        position: relative;
+        background: red;
+        background-size: auto auto;
+    }
+    .section2 {
+        background: black;
+    }
+    .section3 {
+        background: rgb(0, 153, 255);
+    }
+    </style>
+</head>
+<body>
+<div id="container">
+	<div class="section1 section"></div>
+	<div class="section2 section"></div>
+	<div class="section3 section"></div>
+	<div class="section4 section"></div>
+	<div class="section5 section"></div>
+</div>
+
+<script type="text/javascript" src="./js/common/jquery.min.js"></script>
+<script>
+$(function() {
+    var app = {
+        curIndex: 0,
+        sumCount: null,
+        duration: 500,
+        aniTime: 0,
+        init: function() {
+            this.initScrollEvevt();
+        },
+        initScrollEvevt: function() {
+            this.sumCount = $(".section").length;
+            var that = this;
+            window.onmousewheel = document.onmousewheel = function(e) {
+                //如果动画还没执行完，则return
+                if(new Date().getTime() < that.aniTime + that.duration){
+                    return;
+                }
+                e = e || window.event;
+                var t = 0;
+                if (e.wheelDelta) {
+                    //IE/Opera/Chrome
+                    t = e.wheelDelta;
+                    if (t > 0 && that.curIndex > 0) {
+                        that.scrollPrev();
+                    } else if (t < 0 && that.curIndex < that.sumCount - 1) {
+                        that.scrollNext();
+                    }
+                } else if (e.detail) {
+                    //Firefox
+                    t = e.detail;
+                    if (t < 0 && that.curIndex > 0) {
+                        that.scrollPrev();
+                    } else if (t > 0 && that.curIndex < that.sumCount - 1) {
+                        that.moveNext();
+                    }
+                }
+            }
+        },
+        scrollNext: function() {
+            this.aniTime = new Date().getTime();
+            $("#container").css("transform", "translate3D(0, -" + (++this.curIndex) * $(window).height() + "px, 0)");
+        },
+        scrollPrev: function() {
+            this.aniTime = new Date().getTime();
+            $("#container").css("transform", "translate3D(0, -" + (--this.curIndex) * $(window).height() + "px, 0)");
+        }
+    }
+    app.init();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>完整轮播</title>
+    <style type="text/css">
+        body{
+            margin:0;
+            padding:0;
+        }
+        .carousel {
+            width: 600px;
+            height: 350px;
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+        #part {
+            width: 2400px;
+            height: 350px;
+            left: 0px;
+            position: absolute;
+        }
+        img {
+            width:
+            600px;
+            height: 350px;
+            float: left;
+        }
+        .carousel ul {
+            margin: 0;
+            padding: 0;
+            height: 30px;
+            width: 130px;
+            position: absolute;
+            list-style-type: none;
+            left: 10px;
+            bottom: 35px;
+        }
+        .carousel ul li {
+            list-style-type:none;
+            float: left;
+            height: 30px;  width: 30px;
+            line-height: 30px;
+            margin-right: 2px;
+            opacity: .3;
+            filter: alpha(opacity=30);
+            cursor: pointer;
+            background-color: #fff;
+            border-radius: 5px;
+            text-align: center;
+            color: green;
+        }
+        .pre-btn{
+            position: absolute;
+            top: 130px;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .next-btn{
+            position: absolute;
+            top: 130px;
+            right: 0;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="carousel" id="carousel">
+    <div id="part">
+          <a  href="#"><img src = "./img/JD/b1.png" /></a>
+          <a  href="#"><img src = "./img/JD/b2.png" /></a>
+          <a  href="#"><img src = "./img/JD/b3.png" /></a>
+          <a  href="#"><img src = "./img/JD/b4.png" /></a>
+    </div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+    <div class="pre-btn" id="pre"> < </div>
+    <div class="next-btn" id="next"> > </div>
+</div>
+
+<script type="text/javascript">
+    window.onload = function (){
+        var flag = 0,
+            time,
+            part = document.getElementById("part"),
+            lis = document.getElementsByTagName("li"),
+            pre = document.getElementById("pre"),
+            next = document.getElementById("next"),
+            imgs = document.getElementsByTagName("img");
+
+        function turn(value) {
+            if (value !=null){
+                flag = value -2;
+            }
+            if(flag < lis.length-1){
+                flag++;
+            }else{
+                flag = 0;
+            }
+            part.style.left = flag * (-600) + "px"
+            for (var j = 0 ; j < lis.length;j++){
+                lis[j].style.backgroundColor = "#ffffff"
+            }
+            lis[flag].style.backgroundColor = "#666666"
+        }
+    
+        time = setInterval(turn, 3000);
+        
+        part.onmouseover = function () {
+            clearInterval(time);
+        };
+        part.onmouseout = function () {
+            time = setInterval(turn, 3000);
+        };
+        pre.onmouseover = function () {
+            clearInterval(time);
+        };
+        pre.onmouseout = function () {
+            time = setInterval(turn, 3000);
+        };
+        next.onmouseover = function () {
+            clearInterval(time);
+        };
+        next.onmouseout = function () {
+            time = setInterval(turn, 3000);
+        };
+        for (var num = 0; num < lis.length; num++) {
+            lis[num].onmouseover = function () {
+                turn(this.innerHTML);
+                clearInterval(time);
+            }
+            lis[num].onmouseout = function () {
+                time = setInterval(turn, 3000);
+            }
+        };
+        next.onclick = function() {
+            if (flag < 3){
+                flag = flag +1;
+            } else {
+                flag = 0;
+            }
+            part.style.left = flag * (-600) + "px"
+            for (var j = 0 ; j < lis.length;j++){
+                lis[j].style.backgroundColor = "#ffffff"
+            }
+            lis[flag].style.backgroundColor = "#666666"
+        };
+        pre.onclick = function() {
+            if (flag > 0){
+                flag = flag - 1;
+            } else {
+                flag = 3;
+            }
+            part.style.left = flag * (-600) + "px"
+            for (var j = 0 ; j < lis.length;j++){
+                lis[j].style.backgroundColor = "#ffffff"
+            }
+            lis[flag].style.backgroundColor = "#666666"
+        };
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+<title>div width resize</title> 
+<style type="text/css">  
+body{
+	padding: 0; 
+	margin: 0;
+}
+.flexble-left{
+	position: absolute;
+	top: 0;
+	bottom: auto;
+	left: 0;
+	width: 250px;
+	height: 100%;
+	cursor: e-resize;
+	z-index: 0;
+	background: blue;
+}
+.left-content{
+	position: absolute;
+    top: 0;
+    bottom: 0;
+	left: 0;
+	width: 245px;
+	color: #ffffff;
+	text-align: center;
+	background: #000;
+	z-index: 10;
+}
+.flexble-right{
+	position: absolute;
+	top: 0;
+	bottom: auto;
+	right: 0;
+	left: 250px;
+	height: 100%;
+	background: #cccccc;
+}
+.right-content{
+	text-align: center;
+}
+</style>
+</head>  
+<body>
+<div class="flexble-left" id="flexBox" onmousedown="startDrag()"></div>
+<div class="left-content" id="leftContent">left-content</div>
+<div class="flexble-right" id="flexbleRight">
+	<div class="right-content">right-content</div>
+</div>
+<script type="text/javascript">
+var finalWidth = 0,//最后得到的宽度
+	initWidth = 250,//初始化宽度
+	mousedownX = '',//鼠标按下记录的X轴距离
+	dragable = false;//拖动状态，默认不能拖动
+var	startDrag = function() {
+	dragable = true;//鼠标按下，表示拖动开始
+	var e=event?event:window.event;
+    mousedownX = e.pageX; //记录第一次的鼠标位置
+}
+var endDrop = function() {
+	if(dragable){
+		initWidth = finalWidth;
+		dragable = false;
+	}
+}
+document.onmouseup=function(){
+	//鼠标放开，拖动结束
+	endDrop();
+};
+document.onmousemove=function(event){
+	if(dragable){
+		var e=event?event:window.event;
+		flexBox = document.getElementById('flexBox');
+		leftContent = document.getElementById('leftContent');
+		flexbleRight = document.getElementById('flexbleRight');
+		finalWidth =  e.pageX - mousedownX  + parseInt(initWidth);
+		flexBox.style.width = finalWidth + 'px';
+		leftContent.style.width = finalWidth-5 + 'px';
+		flexbleRight.style.left = finalWidth + 'px';
+	};
+};
+</script> 
+</body>  
+</html>

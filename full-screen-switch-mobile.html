@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="format-detection" content="telephone=no" />
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <title>mobile-home</title>
+    <style>
+        body,html{
+            padding:0;
+            margin:0;
+            height:100%;
+            /* touch-action:none; */
+        }
+        .wrap{
+            width:100%;
+            height:100%;
+            overflow:hidden;
+        }
+        .wrap2{
+            width:100%;
+            height:1000%;
+            transition:.3s linear;
+        }
+        .page{
+            width:100%;
+            height:10%;
+            background-color:#fdfdfd;
+            font-size:100px;
+            line-height:400px;
+            text-align:center;
+            font-weight:700;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap" id="wrap">
+    <div class="wrap2" id="wrap2">
+        <div class="page">我是第一屏内容</div>
+        <div class="page" style="background-color:#ccc;">我是第二屏内容</div>
+        <div class="page">我是第三屏内容</div>
+        <div class="page" style="background-color:#ccc;">我是第四屏内容</div>
+        <div class="page">我是第五屏内容</div>
+        <div class="page" style="background-color:#ccc;">我是第六屏内容</div>
+    </div>
+</div>
+
+<script type="text/javascript" src="./js/common/jquery.min.js"></script>
+<script>
+//重要！禁止移动端滑动的默认事件
+document.addEventListener('touchmove', function(event) {
+    event = event ? event : window.event;
+    if (!event.defaultPrevented) {
+        event.preventDefault();
+    }
+}, false)
+var pages = function(obj) {
+    var box = document.getElementById(obj.wrap);
+    var box2 = document.getElementById(obj.wrap2);
+    var len = obj.len;
+    var n = obj.n;
+    var startY, moveY, cliH;
+    //获取屏幕高度
+    var getH = function() {
+        cliH = document.body.clientHeight
+    };
+    getH();
+    window.addEventListener('resize', getH, false);
+    //touchStart
+    var touchstart = function(event) {
+        if(!event.touches.length) {
+            return;
+        }
+        startY = event.touches[0].pageY;
+        moveY = 0;
+    };
+    //touchMove
+    var touchmove = function(event) {
+        if(!event.touches.length) {
+            return;
+        }
+        moveY = event.touches[0].pageY - startY;
+        box2.style.transform = 'translateY(' + (-n * cliH + moveY) + 'px)'; //根据手指的位置移动页面
+    };
+    //touchEnd
+    var touchend = function(event) {
+        //位移小于+-50的不翻页
+        if(moveY < -50) n++;
+        if(moveY > 50) n--;
+        //最后&最前页控制
+        if(n < 0) n = 0;
+        if(n > len - 1) n = len - 1;
+        //重定位
+        box2.style.transform = 'translateY(' + (-n * 10) + '%)'; //根据百分比位置移动页面
+    };
+    //touch事件绑定
+    box.addEventListener("touchstart", function(event) {
+        touchstart(event)
+    }, false);
+    box.addEventListener("touchmove", function(event) {
+        touchmove(event)
+    }, false);
+    box.addEventListener("touchend", function(event) {
+        touchend(event)
+    }, false);
+};
+pages({
+    wrap: 'wrap',
+    wrap2: 'wrap2',
+    len: 6,
+    n: 0
+});
+</script>
+</body>
+</html>

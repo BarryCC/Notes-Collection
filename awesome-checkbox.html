@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>awesome-checkbox</title>
+<style>
+    .radio-sex {
+        position: relative;
+        display: inline-block;
+        margin-right: 12px;
+    }
+    .radio-sex input {
+        vertical-align: middle;
+        margin-top: -2px;
+        margin-bottom: 1px;
+        /* 前面三行代码是为了让radio单选按钮与文字对齐 */
+        width: 20px;
+        height: 20px;
+        appearance: none;/*清除默认样式*/
+        -webkit-appearance: none;
+        opacity: 0;
+        outline: none;
+    }
+    .radio-sex label {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: -1;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #3582E9;
+        border-radius: 100%;
+    }
+    .radio-sex input:checked+label {
+        background: #3582E9;
+    }
+    .radio-sex input:checked+label::after {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 2px;
+        width: 5px;
+        height: 12px;
+        border-right: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        transform: rotate(45deg);
+    }
+</style>
+</head>
+<body>
+    <h2>方式一：</h2>
+    <div class="one">
+        <p>您的性别：</p>
+        <div class="radio-sex">
+            <input type="radio" id="sex1" name="sex">
+            <label for="sex1"></label>
+            <span>男</span>
+        </div>
+        <div class="radio-sex">
+            <input type="radio" id="sex2" name="sex">
+            <label for="sex2"></label> 女
+        </div>
+    </div>
+    <h2>方式二：</h2>
+    <div>link：https://www.bootcdn.cn/awesome-bootstrap-checkbox/</div>
+</body>
+</html>

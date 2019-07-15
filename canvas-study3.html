@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas</title>
+    <meta charset="utf-8">
+    <style>
+        #canvas{
+            border: 1px solid #aaaaaa; 
+            display: block; 
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800">
+        你的浏览器不支持Canvas
+    </canvas>
+</body>
+<script type="text/javascript">
+    window.onload=function () {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        
+        context.beginPath();
+        context.rect(0, 0, 800, 800);
+        context.fillStyle = '#AA9033';
+        context.fill();
+
+        //平移变换translate()，平移原点坐标点，传入两个参数，即新画布坐标系原点的坐标，绘制之前使用；
+        //注意使用状态保存，原因：canvas是基于状态的绘制，第一次平移后后面的平移会基于上一个坐标来绘制，
+        //造成依赖坐标混乱；处理方法：每次平移之前使用save()方法，绘制之后，使用restore()方法；
+        //实例1
+        context.fillStyle = "#00AAAA";
+        context.fillRect(0,0,200,100);
+        context.save();
+        context.fillStyle = "red";
+        context.translate(100,100);
+        context.fillRect(0,0,200,100);
+        context.restore();
+        context.save();
+        context.fillStyle = "green";
+        context.translate(200,200);
+        context.fillRect(0,0,200,100);
+        context.restore();
+
+        //旋转变换rotate(),参数是弧度，是基于坐标系原点顺时针旋转，通常要配合translate()方法使用
+        //注意状态保存，同translate()方法
+        //实例2
+        for(var i=1; i<=10; i++) {
+            context.save();
+            context.translate(600, 200);
+            context.rotate(36*i*Math.PI/180);
+            context.fillStyle = "rgba(255, 0, 0, 0.25)";
+            context.fillRect(0, 0, 100, 100);
+            context.restore();
+        }
+
+        //缩放变换scale()，参数：水平方向和垂直方向上对象的缩放倍数。
+        //注意点：缩放时，图像左上角坐标的位置也会对应缩放，图像线条的粗细也会对应缩放；
+
+        //矩阵变换transform(a, b, c, d, e, f);参数：a：水平缩放（1）；b:水平倾斜（0）；
+        //参数：c：垂直倾斜（0）；d：垂直缩放（1）；e：水平位移（0）；f：垂直位移（0）；
+        //使用context.transform (1,0,0,1,dx,dy)代替context.translate(dx,dy)
+        //使用context.transform(sx,0,0,sy,0,0)代替context.scale(sx, sy)
+        //使用context.transform(0,b,c,0,0,0)来实现倾斜效果(最实用)。
+
+        //文本，font(设置字体)、fillStyle（字体颜色）、fillText（显示字体）
+        //文本实例
+        context.beginPath();
+        context.font = "30px Verdana";
+        var gradient = context.createLinearGradient(0,0,800,0);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+        context.fillStyle = gradient;
+        context.strokeStyle = "#00AAAA";
+        context.strokeText("https://github.com/BarryCC", 50, 400);
+        context.fillText("https://github.com/BarryCC", 50, 450);
+
+        //限制宽度
+        context.fillText("https://github.com/BarryCC", 50, 500, 200);
+
+        context.beginPath();
+        var img = new Image();
+        img.src = "./test.jpg";
+        img.onload = function(){
+            var pattern = context.createPattern(img, "repeat");
+            context.fillStyle = pattern;
+            context.fillText("https://github.com/BarryCC", 50, 550);
+        }
+
+        context.beginPath();
+        context.fillStyle = "#00AAAA";
+        context.fillText("https://github.com/BarryCC，欢迎访问", 50, 600);
+
+        // 水平对齐textAlign,center|end|left|right|start
+        // 垂直对齐textBaseline,alphabetic|top|hanging|middle|ideographic|bottom
+        // context.measureText(text).width,获取目标长度
+
+        // context.shadowColor：阴影颜色。
+        // context.shadowOffsetX：阴影x轴位移。正值向右，负值向左。
+        // context.shadowOffsetY：阴影y轴位移。正值向下，负值向上。
+        // context.shadowBlur：阴影模糊滤镜。数据越大，扩散程度越大。
+
+    }
+</script>
+</html>

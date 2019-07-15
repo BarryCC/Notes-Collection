@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="author" content="智能社 - zhinengshe.com" />
+<meta name="copyright" content="智能社 - zhinengshe.com" />
+<title>放大镜</title>
+<style>
+#div1{ position:relative;width:310px; height:310px;}
+#mask {display:none; position:absolute;left:0;top:0;width:100px; height:100px; background: url(http://gtms01.alicdn.com/tps/i4/T12pdtXaldXXXXXXXX-2-2.png);
+cursor: move; line-height:100px; font-size:30px;}
+#div2{ display: none;position:absolute;left:320px; top:0;width:310px; height:310px; overflow:hidden;}
+#div2 img{ position:absolute;left:0;top:0;}
+</style>
+<script>
+window.onload = function(){
+   var oDiv1 = document.getElementById("div1");
+   var oDiv2 = document.getElementById("div2");
+   var oMask = document.getElementById("mask");
+   var oBigImg = oDiv2.children[0];
+   oDiv1.onmousemove = function(ev){
+      var oEvent = ev || event;//需要获取和事件相关的信息时使用
+      var l = oEvent.clientX - this.offsetLeft - oMask.offsetWidth/2;
+      var t = oEvent.clientY - this.offsetTop - oMask.offsetHeight/2;
+      //clientX/Y:视口中客户区的坐标位子；知道鼠标在视口中什么位子发生和pageX/Y：页面坐标—在页面中什么位子发生
+      var maxWidth = oDiv1.offsetWidth - oMask.offsetWidth;
+      var maxHeight= oDiv1.offsetHeight - oMask.offsetHeight;
+
+      if(l < 0){
+         l = 0;
+      } else if( l > maxWidth) {
+         l = maxWidth;
+      }
+      if(t < 0){
+         t = 0;
+      } else if( t > maxHeight) {
+         t = maxHeight;
+      }
+      var scaleX = l/maxWidth;
+      var scaleY = t/maxHeight;
+      oMask.innerHTML = scaleX.toFixed(2) + "|" + t;//toFixed(2)number方法，四舍五入并保留两位
+
+      oBigImg.style.left = -scaleX*(oBigImg.offsetWidth - oDiv2.offsetWidth) + "px";
+      oBigImg.style.top = -scaleY*(oBigImg.offsetHeight - oDiv2.offsetHeight) + "px";
+      
+      oMask.style.left = l + "px";
+      oMask.style.top = t + "px";
+   };
+   oDiv1.onmouseover = function(ev){
+      var oEvent = ev || event;
+      //relatedTarget 事件属性返回与事件的目标节点相关的节点
+      var oFrom = oEvent.fromElement || oEvent.relatedTarget;
+      console.log(oFrom);
+      if(oFrom && oDiv1.contains(oFrom)){
+         return;
+      }
+      //小块显示 
+      oMask.style.display = "block";
+      //大块
+      oDiv2.style.display = "block"; 
+   };
+   oDiv1.onmouseout = function(ev){
+      
+      var oEvent = ev || event;
+
+      var oTo = oEvent.toElement || oEvent.relatedTarget;
+      if(oTo && oDiv1.contains(oTo)){
+         return;
+      }
+      //小块显示 
+      oMask.style.display = "none";
+      //大块
+      oDiv2.style.display = "none";  
+   };
+};
+</script>
+</head>
+<body>
+<div id="div1">
+   <img src="./img/JD/b1.png" width="310" height="310">
+   <span id="mask"></span>
+   <div id="div2">
+      <img src="./img/JD/b1.png" width="900" height="900">
+    </div>
+</div>
+</body>
+</html>

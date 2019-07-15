@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>canvas</title>
+    <meta charset="utf-8">
+    <style>
+        #canvas{
+            border: 1px solid #aaaaaa; 
+            display: block; 
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="800">
+        你的浏览器不支持Canvas
+    </canvas>
+</body>
+<script type="text/javascript">
+    window.onload=function () {
+        //封装矩形，后面可添加旋转角度
+        function drawReact(cxt, x, y, width, height, borderWidth, borderColor, fillColor){
+            //moveTo()：将画笔移动至作为开始，lineTo（）：绘制到；
+            //绘制多条不同的线段，再绘制前加context.beginPath()，结束加context.closePath()
+            cxt.beginPath();
+            //canvas已经封装了矩形方法
+            //fillRect(x,y,width,height)、strokeRect(x,y,width,height)。
+            //这两个函数可以分别看做rect()与fill()以及rect()与stroke()的组合。
+            cxt.rect(x, y, width, height);
+            //基础样式
+            cxt.lineJoin = 'round';
+            cxt.lineWidth = borderWidth;
+            cxt.strokeStyle = borderColor;
+            cxt.fillStyle = fillColor;
+            //确定绘制只有两种方法，fill()和stroke()，填充和描边
+            cxt.stroke();
+            cxt.fill();
+        };
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");//画笔
+        //注意点：canvas是基于状态回执，前面步骤是确定状态，最后一步才具体绘制
+
+        //线条属性：
+        // lineCap:定义上下文中线的端点
+        //     butt：默认值，端点垂直于线段边缘的平治边缘；
+        //     round：端点是在线段边缘处以线宽为直径的半圆；
+        //     square：端点是在线段边缘处以线宽为长，以一半线宽为宽度的矩形；
+        // lineJoin： 定义两条线相交产生的拐角，可将其称为连接。在连接处创建一个填充三角形，
+        //     miter：默认值，在连接处边缘延长相接。miterLimit 是角长和线宽所允许的最大比例(默认是 10)。
+        //     bevel：连接处是一个对角线斜角。
+        //     round：连接处是一个圆。
+        
+        context.beginPath();
+        context.rect(0, 0, 800, 800);
+        context.fillStyle = '#AA9033';
+        context.fill();
+        //实例1
+        for(var i=10; i>0; i--){
+            drawReact(context, 105 - 10 * i, 105 - 10 * i, 20 * i, 20 * i, 10, 'black', 'white');
+        }
+        
+        //颜色填充，渐变
+        //实例2,线性渐变：
+        context.beginPath();
+        context.rect(220, 0, 210, 210);
+        var grd = context.createLinearGradient(220, 110, 430, 110);//添加渐变线
+        grd.addColorStop(0, 'black');//关键色
+        grd.addColorStop(0.5, 'white');//关键色
+        grd.addColorStop(1, 'black');//关键色
+        context.fillStyle = grd;
+        context.fill();
+        //实例3，径向渐变
+        var grd2 = context.createRadialGradient(620,100,50,620,100,90);
+        grd2.addColorStop(0,"olive");
+        grd2.addColorStop(0.25,"maroon");
+        grd2.addColorStop(0.5,"aqua");
+        grd2.addColorStop(0.75,"fuchsia");
+        grd2.addColorStop(0.25,"teal");
+        context.fillStyle = grd2;
+        context.fillRect(440,0,360,210);
+
+        //填充样式：
+        //createPattern()函数，参数一：image、canvas、video实例，参数二：repeat、repeat-x、repeat-y、no-repeat
+        var img1 = new Image();
+        img1.src = './test.jpg';
+        img1.onload = function() {
+            var pattern = context.createPattern(img1, 'repeat');
+            context.fillStyle = pattern;
+            context.fillRect(0, 220, 800, 200);
+        }
+    }
+</script>
+</html>

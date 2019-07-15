@@ -1,0 +1,516 @@
+@font-face{
+    font-family: 'NumberFont';
+    src : url('../css/common/fonts/DS-DIGIB.TTF');
+}
+body{
+    padding: 0;
+    margin: 0;
+    background: url("../img/dataVisualization/bjPic.jpg") no-repeat;
+    background-size: cover;
+    letter-spacing: 1px;
+}
+
+/*** 主题切换 ***/
+.u-choose-theme1,
+.u-choose-theme2{
+    width: 80px;
+    height: 30px;
+    position: absolute;
+    bottom: 29px;
+    z-index: 115;
+    cursor: pointer;
+}
+.u-choose-theme1{
+    left: 490px;
+}
+.u-choose-theme2{
+    right: 490px;
+}
+
+/*** 页面公共样式 ***/
+.u-title{
+    color: #dcdcdc;
+    font-size: 17px;
+    width: fit-content;
+    padding: 0 20px 0 8px;
+    letter-spacing: 2px;
+}
+.styleType1 .u-title{
+    background: -webkit-linear-gradient(left, rgba(10, 203, 238,0.5) , transparent); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, rgba(10, 203, 238,0.5), transparent); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, rgba(10, 203, 238,0.5), transparent); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, rgba(10, 203, 238,0.5) , transparent); /* 标准的语法 */
+}
+.styleType2 .u-title{
+    background: -webkit-linear-gradient(left, rgba(115, 21, 243, 0.5) , transparent); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, rgba(115, 21, 243, 0.5), transparent); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, rgba(115, 21, 243, 0.5), transparent); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, rgba(115, 21, 243, 0.5) , transparent); /* 标准的语法 */
+}
+.u-title .title-unit{
+    font-size: 14px;
+}
+.u-title i{
+    position: relative;
+    top: 3px;
+    font-size: 24px;
+}
+.m-down-arrow{
+    display: inline-block;
+}
+.m-down-arrow img{
+    position: relative;
+    width: 30px;
+    top: 3px;
+}
+.m-down-arrow span{
+    font-size: 14px;
+    color: #bbfe50;
+}
+.u-number{
+    float: left;
+    width: 38px;
+    height: 48px;
+    text-align: center;
+    line-height: 48px;
+    margin-right: 7px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 42px;
+    font-family:'NumberFont';
+}
+.styleType1 .u-number{
+    background: -webkit-linear-gradient(#1288a2, #1060a7); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(#1288a2, #1060a7); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(#1288a2, #1060a7); /* Firefox 3.6 - 15 */
+    background: linear-gradient(#1288a2, #1060a7); /* 标准的语法 */
+    box-shadow: 0 0 3px 1px #1288a2;
+}
+.styleType2 .u-number{
+    background: -webkit-linear-gradient(rgba(249, 30, 71, 0.5), rgba(115, 21, 243, 0.5)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgba(249, 30, 71, 0.5), rgba(115, 21, 243, 0.5)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgba(249, 30, 71, 0.5), rgba(115, 21, 243, 0.5)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgba(249, 30, 71, 0.5), rgba(115, 21, 243, 0.5)); /* 标准的语法 */
+    box-shadow: 0 0 3px 1px #ef98bb;
+}
+.numberList-enter-active{
+    transition: all 4s;
+}
+.numberList-enter{
+    opacity: 0;
+    transform: translateX(-180px);
+}
+.numberFade-enter-active, .numberFade-leave-active {
+    transition: all 2s;
+}
+.numberFade-enter, .numberFade-leave-to{
+    opacity: 0;
+}
+.compare-picture-show {
+    position: relative;
+    float: left;
+    width: 57px;
+}
+.compare-picture-show .u-proportion{
+    position: absolute;
+    top: 21px;
+    left: 17px;
+    font-size: 12px;
+}
+.m-compare-value{
+    float: left;
+    line-height: 30px;
+    margin-left: 10px;
+    font-size: 14px;
+}
+.m-compare-value .u-compare-title{
+    display: inline-block;
+    width: 75px;
+}
+.m-compare-value .u-current-value {
+    height: 8px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    margin-right: 3px;
+}
+.styleType1 .m-compare-value .u-current-value {
+    background: -webkit-linear-gradient(left, #5157f5 , #3ffcd4); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #5157f5, #3ffcd4); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #5157f5, #3ffcd4); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #5157f5 , #3ffcd4); /* 标准的语法 */
+}
+.styleType2 .m-compare-value .u-current-value {
+    background: -webkit-linear-gradient(left, #7315f3,  #ef98bb ); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(right, #7315f3,  #ef98bb); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(right, #7315f3,  #ef98bb); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to right, #7315f3,  #ef98bb); /* 标准的语法 */
+}
+.styleType1 .m-compare-value .u-current-number{
+    color: #02c7fc;
+    font-size: 16px;
+}
+.styleType2 .m-compare-value .u-current-number{
+    color: #ef98bb;
+    font-size: 16px;
+}
+.m-compare-value .u-target-value {
+    height: 8px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background: #cfd0d2;
+    display: inline-block;
+    margin-right: 3px;
+}
+.m-compare-value .current-value-1{
+    width: 170px;
+    animation: lineCt1 7s linear 4s infinite normal;
+    -webkit-animation: lineCt1 7s linear 4s infinite normal;
+}
+@keyframes lineCt1
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:60px;}
+    45%  {width:90px;}
+    55%  {width:135px;}
+    65%  {width:170px;}
+    85% {width:170px;}
+    100% {width:170px;}
+}
+@-webkit-keyframes lineCt1 /* Safari and Chrome */
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:60px;}
+    45%  {width:90px;}
+    55%  {width:135px;}
+    65%  {width:170px;}
+    85% {width:170px;}
+    100% {width:170px;}
+}
+.m-compare-value .current-value-2{
+    width: 120px;
+    animation: lineCt2 7s linear 4s infinite normal;
+    -webkit-animation: lineCt2 7s linear 4s infinite normal;
+}
+@keyframes lineCt2
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:80px;}
+    55%  {width:100px;}
+    65%  {width:120px;}
+    85% {width:120px;}
+    100% {width:120px;}
+}
+@-webkit-keyframes lineCt2 /* Safari and Chrome */
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:80px;}
+    55%  {width:100px;}
+    65%  {width:120px;}
+    85% {width:120px;}
+    100% {width:120px;}
+}
+.m-compare-value .current-value-3{
+    width: 180px;
+    animation: lineCt3 7s linear 4s infinite normal;
+    -webkit-animation: lineCt3 7s linear 4s infinite normal;
+}
+@keyframes lineCt3
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:110px;}
+    55%  {width:150px;}
+    65%  {width:180px;}
+    85% {width:180px;}
+    100% {width:180px;}
+}
+@-webkit-keyframes lineCt3 /* Safari and Chrome */
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:110px;}
+    55%  {width:150px;}
+    65%  {width:180px;}
+    85% {width:180px;}
+    100% {width:180px;}
+}
+.m-compare-value .current-value-4{
+    width: 120px;
+    animation: lineCt4 7s linear 4s infinite normal;
+    -webkit-animation: lineCt3 7s linear 4s infinite normal;
+}
+@keyframes lineCt3
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:80px;}
+    55%  {width:100px;}
+    65%  {width:120px;}
+    85% {width:120px;}
+    100% {width:120px;}
+}
+@-webkit-keyframes lineCt3 /* Safari and Chrome */
+{
+    0%   {width:5px;}
+    15%  {width:35px;}
+    25%  {width:50px;}
+    45%  {width:80px;}
+    55%  {width:100px;}
+    65%  {width:120px;}
+    85% {width:120px;}
+    100% {width:120px;}
+}
+/*** 页面公共样式结束 ***/
+
+.center{
+    position: absolute;
+    width:70%;
+    top:0;
+    bottom:0;
+    left:15%;
+    overflow: hidden;
+    z-index: 99;
+}
+.center .center-content{
+    position: absolute;
+    width: 100%;
+    height:100%;
+    color: #ffffff;
+}
+.center .center-content .u-content-title{
+    position: absolute;
+    left:0;
+    bottom: 30px;
+    width:100%;
+    height: 30px;
+}
+.center .center-content .u-content-title>div{
+    width: 360px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    font-size: 15px;
+    margin:0 auto;
+    background: -webkit-linear-gradient(left, transparent, #241e9c, transparent);
+    background: -o-linear-gradient(left, transparent, #241e9c, transparent);
+    background: -moz-linear-gradient(left, transparent, #241e9c, transparent);
+    background: linear-gradient(to right, transparent, #241e9c, transparent);
+}
+
+.left{
+    position: absolute;
+    width:30%;
+    left:0;
+    top:0;
+    bottom:0;
+    z-index: 100;
+    padding-left: 45px;
+    padding-top: 30px;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+.left .left-part{
+    margin-top: 50px;
+    /*background: -webkit-linear-gradient(left, rgba(0, 0, 0,0.7), transparent); !* Safari 5.1 - 6.0 *!
+    background: -o-linear-gradient(right, rgba(0, 0, 0,0.7), transparent); !* Opera 11.1 - 12.0 *!
+    background: -moz-linear-gradient(right, rgba(0, 0, 0,0.7), transparent); !* Firefox 3.6 - 15 *!
+    background: linear-gradient(to right, rgba(0, 0, 0,0.7), transparent); !* 标准的语法 *!*/
+}
+.left .left-part>div{
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+.left .part2>div{
+    float: left;
+    line-height: 24px;
+}
+.styleType1 .left .part2 .value-number{
+    color: #0accff;
+    font-size: 34px;
+}
+.styleType2 .left .part2 .value-number{
+    color: #ffffff;
+    font-size: 34px;
+}
+.leftPart1-enter-active{
+    transition: all 2s;
+}
+.leftPart2-enter-active{
+    transition: all 2.5s;
+}
+.leftPart3-enter-active{
+    transition: all 3s;
+}
+.leftPart4-enter-active{
+    transition: all 3.5s;
+}
+.leftPart5-enter-active{
+    transition: all 4s;
+}
+.leftPart1-enter,
+.leftPart2-enter,
+.leftPart3-enter,
+.leftPart4-enter,
+.leftPart5-enter {
+    opacity: 0;
+    transform: translateX(100px);
+}
+.leftChartShow-enter-active{
+    transition: all 2s;
+}
+.leftChartShow-enter{
+    opacity: 0;
+    transform: translateX(-180px);
+}
+
+.right{
+    position: absolute;
+    width:28%;
+    right:0;
+    top:0;
+    bottom:0;
+    z-index: 100;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 30px;
+    box-sizing: border-box;
+    color: #ffffff;
+}
+.right .right-part{
+    margin-top: 50px;
+    /*background: -webkit-linear-gradient(left, rgba(0, 0, 0,0.7), transparent); !* Safari 5.1 - 6.0 *!
+    background: -o-linear-gradient(left, rgba(0, 0, 0,0.7), transparent); !* Opera 11.1 - 12.0 *!
+    background: -moz-linear-gradient(left, rgba(0, 0, 0,0.7), transparent); !* Firefox 3.6 - 15 *!
+    background: linear-gradient(to left, rgba(0, 0, 0,0.7), transparent); !* 标准的语法 *!*/
+}
+.right .right-part>div{
+    overflow: hidden;
+    margin-bottom: 35px;
+}
+.right .part2>div{
+    float: left;
+    line-height: 24px;
+}
+.styleType1 .right .part2 .value-number{
+    color: #0accff;
+    font-size: 34px;
+}
+.styleType2 .right .part2 .value-number{
+    color: #ffffff;
+    font-size: 34px;
+}
+.rightPart1-enter-active{
+    transition: all 2s;
+}
+.rightPart2-enter-active{
+    transition: all 2.5s;
+}
+.rightPart3-enter-active{
+    transition: all 3s;
+}
+.rightPart4-enter-active{
+    transition: all 3.5s;
+}
+.rightPart5-enter-active{
+    transition: all 4s;
+}
+.rightPart1-enter,
+.rightPart2-enter,
+.rightPart3-enter,
+.rightPart4-enter,
+.rightPart5-enter {
+    opacity: 0;
+    transform: translateX(-100px);
+}
+.rightChartShow-enter-active{
+    transition: all 2s;
+}
+.rightChartShow-enter{
+    opacity: 0;
+    transform: translateX(180px);
+}
+
+
+.header{
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height: 55px;
+    z-index: 110;
+    text-align: center;
+}
+.header .header-img{
+    width: 1600px;
+    height: 55px;
+    padding-left: 49px;
+    padding-right: 49px;
+    padding-top: 23px;
+}
+.header .header-title{
+    width: 340px;
+    position: relative;
+    top: -65px;
+}
+.border-left{
+    position: absolute;
+    top: 23px;
+    left:0;
+    bottom:5px;
+    width: 50px;
+    z-index: 110;
+    overflow: hidden;
+}
+.border-left img{
+    width: 50px;
+    height:100%;
+}
+.border-right{
+    position: absolute;
+    top: 23px;
+    right:0;
+    bottom:5px;
+    width: 50px;
+    z-index: 110;
+    overflow: hidden;
+}
+.border-right img{
+    width: 50px;
+    height:100%;
+}
+.border-bottom{
+    position: absolute;
+    width:100%;
+    bottom:0;
+    z-index: 110;
+    overflow: hidden;
+    height: 107px;
+    text-align: center;
+}
+.border-bottom img{
+    width:100%;
+}
+.border-bottom .u-menu{
+    width: 50px;
+    position: relative;
+    top: -107px;
+    margin-left: 15px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.border-bottom .u-menu:hover{
+    top: -115px;
+}
